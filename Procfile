@@ -1,2 +1,2 @@
-web: gunicorn apps-p.wsgi --log-file -
+web: gunicorn blog.wsgi --log-file -
 worker: python worker.py
