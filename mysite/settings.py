@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +27,7 @@ SECRET_KEY = '4o$$3$1(b3=cffh*hp%#4+8hx$_xyjb7v!!7!exc2e98lz#iby'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [mysterious-inlet-74008]
+ALLOWED_HOSTS = ['mysterious-inlet-74008']
 
 
 # Application definition
@@ -75,12 +77,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_env_variable('DATABASE_NAME'),
-        'USER': get_env_variable('DATABASE_USER'),
-        'PASSWORD': get_env_variable('DATABASE_PASSWORD'),
+        'NAME': 'blog_db',
+        'USER': 'myusername',
+        'PASSWORD': 'mypassword',
         'HOST': '',
         'PORT': '',
     }
@@ -127,7 +130,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = ‘staticfiles’
+STATIC_ROOT = 'staticfiles'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
@@ -135,7 +138,7 @@ STATICFILES_DIRS = (
 )
 
 # Update database configuration with $DATABASE_URL.
-import dj_database_url
+
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -144,5 +147,5 @@ DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-SECURE_PROXY_SSL_HEADER = (‘HTTP_X_FORWARDED_PROTO’, ‘https’)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
